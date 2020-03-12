@@ -1,8 +1,15 @@
 import React from "react";
+import styled from "styled-components";
 
 import Cell from "./Cell";
 
-const Div = styled.div``;
+const Div = styled.div`
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid;
+`;
 
 function Region() {
   return (
@@ -13,3 +20,5 @@ function Region() {
     </Div>
   );
 }
+
+export default Region;
