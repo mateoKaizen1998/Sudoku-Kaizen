@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { onCellSelect } from "../actions";
+import { setSelected } from "../actions";
+import { useDispatch } from "react-redux";
 
-const Container = styled.div`
+const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,20 +16,19 @@ const Container = styled.div`
   ${({ isSelected }) =>
     isSelected &&
     css`
-      background: red;
+      background: lightblue;
     `}
 `;
 
-function Cell({ selected, row, column, value }) {
-  const onClick = () => {
-    onCellSelect(row, column);
-  };
+function Cell({ value }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setSelected(value));
+  }, []);
 
-  return (
-    <Container isSelected={selected} onClick={onClick}>
-      {value}
-    </Container>
-  );
+  //ver como dispatchear la action, tambien ver la comparacion de === en el if de la action
+
+  return <Div onClick={() => setSelected()}>{value}</Div>;
 }
 
 export default Cell;

@@ -1,5 +1,5 @@
 const board = [];
-board.fill('0');
+board.fill("0");
 
 // for(var i=0; i<9; i++) {
 //     board[i] = [];
@@ -9,7 +9,8 @@ board.fill('0');
 // };
 
 const Model = {
-  board
+  board,
+  selectedCell: null
 };
 
 export default Model;

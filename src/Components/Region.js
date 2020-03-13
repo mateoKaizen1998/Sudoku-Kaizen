@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { setCellValue } from "../actions";
 import Cell from "./Cell";
 
 const Div = styled.div`
@@ -11,11 +12,15 @@ const Div = styled.div`
   border: 1px solid;
 `;
 
-function Region() {
+function Region({ value }) {
+  /* const onClick = value => {
+    setCellValue();
+  }; */
+
   return (
     <Div>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(col => (
-        <Cell value={0} />
+      {value.map(cell => (
+        <Cell value={cell} /> //aca va la operacion para cambiar el valor de la celda
       ))}
     </Div>
   );
