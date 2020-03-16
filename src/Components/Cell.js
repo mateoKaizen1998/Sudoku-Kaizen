@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { setSelected } from "../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import Region from "./Region";
 
 const Div = styled.div`
   display: flex;
@@ -20,15 +22,19 @@ const Div = styled.div`
     `}
 `;
 
-function Cell({ value }) {
+function Cell({ value, region, cellNumber }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setSelected(value));
+    selectCell();
   }, []);
 
-  //ver como dispatchear la action, tambien ver la comparacion de === en el if de la action
+  const data = useSelector(state => state.selectCell);
+  console.log(data);
+  function selectCell() {
+    dispatch(setSelected(region, cellNumber));
+  }
 
-  return <Div onClick={() => setSelected()}>{value}</Div>;
+  return <Div onClick={selectCell}>{value}</Div>;
 }
 
 export default Cell;

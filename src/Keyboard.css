@@ -2,6 +2,7 @@
   margin-left: 50px;
   width: auto;
   border: 2px solid black;
+  text-align: end;
 }
 
 button {
@@ -11,6 +12,10 @@ button {
 #buttonRow {
   display: flex;
   text-align: center;
-  align-items: center;
+  align-items: ;
   font-size: 50px;
+}
+
+tr {
+  text-align: ;
 }

@@ -15,8 +15,8 @@ function Board() {
   const board = useSelector(state => state.board);
   return (
     <Div>
-      {board.map(region => (
-        <Region value={region} />
+      {board.map((region, index) => (
+        <Region values={region} regionNumber={index} />
       ))}
     </Div>
   );
