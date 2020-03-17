@@ -5,9 +5,9 @@ const setBoard = board => ({
   payload: board
 });
 
-const setCellValue = (region, cell, value) => ({
+const setCellValue = value => ({
   type: "setCellValue",
-  payload: { region, cell, value }
+  payload: { value }
 });
 
 const setSelected = (region, cell) => ({

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import Region from "./Region";
 
-const Div = styled.div`
+const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 456px;
@@ -14,11 +14,11 @@ const Div = styled.div`
 function Board() {
   const board = useSelector(state => state.board);
   return (
-    <Div>
+    <Container>
       {board.map((region, index) => (
-        <Region values={region} regionNumber={index} />
+        <Region region={region} regionNumber={index} />
       ))}
-    </Div>
+    </Container>
   );
 }
 

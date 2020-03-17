@@ -1,49 +1,69 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import { setCellValue } from "./actions";
 
 import "./Keyboard.css";
 
 function Keyboard() {
-  const onClick = e => {
-    // nombreAction(e.target.value);
-  };
+  const dispatch = useDispatch();
 
-  const selected = useSelector(state => state.selected);
+  const onClick = ({ target: { value } }) => {
+    dispatch(setCellValue(value));
+  };
 
   return (
     <table className="tableKeyboard">
       <tbody>
         <tr>
           <td>
-            <button onClick={onClick}>1</button>
+            <button value={1} onClick={onClick}>
+              1
+            </button>
           </td>
           <td>
-            <button onClick={onClick}>2</button>
+            <button value={2} onClick={onClick}>
+              2
+            </button>
           </td>
           <td>
-            <button onClick={onClick}>3</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button onClick={onClick}>4</button>
-          </td>
-          <td>
-            <button onClick={onClick}>5</button>
-          </td>
-          <td>
-            <button onClick={onClick}>6</button>
+            <button value={3} onClick={onClick}>
+              3
+            </button>
           </td>
         </tr>
         <tr>
           <td>
-            <button onClick={onClick}>7</button>
+            <button value={4} onClick={onClick}>
+              4
+            </button>
           </td>
           <td>
-            <button onClick={onClick}>8</button>
+            <button value={5} onClick={onClick}>
+              5
+            </button>
           </td>
           <td>
-            <button onClick={onClick}>9</button>
+            <button value={6} onClick={onClick}>
+              6
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button value={7} onClick={onClick}>
+              7
+            </button>
+          </td>
+          <td>
+            <button value={8} onClick={onClick}>
+              8
+            </button>
+          </td>
+          <td>
+            <button value={9} onClick={onClick}>
+              9
+            </button>
           </td>
         </tr>
         <tr id="buttonRow">

@@ -27,17 +27,20 @@ export default (state = { board: [], selectedCell: {} }, action) => {
 
     case "setCellValue": //sirve para setear el value a una cell
       let newRegion = [
-        ...state.board[action.payload.region].slice(0, action.payload.cell),
+        ...state.board[state.selectedCell.region].slice(
+          0,
+          state.selectedCell.cell
+        ),
         action.payload.value,
-        ...state.board[action.payload.region].slice(action.payload.cell)
+        ...state.board[state.selectedCell.region].slice(state.selectedCell.cell)
       ];
 
       return {
         ...state,
         board: [
-          ...state.board.slice(0, action.payload.region),
+          ...state.board.slice(0, state.selectedCell.region),
           newRegion,
-          ...state.board.slice(action.payload.region)
+          ...state.board.slice(state.selectedCell.region)
         ]
       };
     default:

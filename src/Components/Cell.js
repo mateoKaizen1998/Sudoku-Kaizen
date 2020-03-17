@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Region from "./Region";
 
-const Div = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,26 +15,25 @@ const Div = styled.div`
   box-sizing: border-box;
   text-align: center;
   font-size: 20px;
-  ${({ isSelected }) =>
-    isSelected &&
+  ${({ selected }) =>
+    selected &&
     css`
       background: lightblue;
     `}
 `;
 
-function Cell({ value, region, cellNumber }) {
+function Cell({ value, region, cellNumber, isSelected }) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    selectCell();
-  }, []);
 
-  const data = useSelector(state => state.selectCell);
-  console.log(data);
-  function selectCell() {
+  const selectCell = () => {
     dispatch(setSelected(region, cellNumber));
-  }
+  };
 
-  return <Div onClick={selectCell}>{value}</Div>;
+  return (
+    <Container selected={isSelected} onClick={selectCell}>
+      {value}
+    </Container>
+  );
 }
 
 export default Cell;

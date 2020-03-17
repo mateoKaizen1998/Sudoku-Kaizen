@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { setCellValue } from "../actions";
 
 import Cell from "./Cell";
 
-const Div = styled.div`
+const Container = styled.div`
   width: 150px;
   height: 150px;
   display: flex;
@@ -13,17 +14,25 @@ const Div = styled.div`
   border: 1px solid;
 `;
 
-function Region({ values, regionNumber }) {
-  /* const onClick = value => {
-    setCellValue();
-  }; */
+function Region({ region, regionNumber }) {
+  const regionSelected = useSelector(state => state.selectedCell.region);
+  const cellSelected = useSelector(state => state.selectedCell.cell);
+
+  const isSelected = (cellNumber, regionNumber) => {
+    return cellNumber === cellSelected && regionSelected === regionNumber;
+  };
 
   return (
-    <Div>
-      {values.map((cell, index) => (
-        <Cell value={cell} region={regionNumber} cellNumber={index} /> //aca va la operacion para cambiar el valor de la celda
+    <Container>
+      {region.map((cell, cellNumber) => (
+        <Cell
+          value={cell}
+          region={regionNumber}
+          cellNumber={cellNumber}
+          isSelected={isSelected(cellNumber, regionNumber)}
+        /> //aca va la operacion para cambiar el valor de la celda
       ))}
-    </Div>
+    </Container>
   );
 }
 

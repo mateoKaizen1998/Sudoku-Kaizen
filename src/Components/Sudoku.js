@@ -28,7 +28,7 @@ function Sudoku() {
       <div
         style={{
           display: "flex",
-          margin: "50px 50px",
+          margin: "50px",
           alignItems: "center"
         }}
       >
