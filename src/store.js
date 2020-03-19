@@ -7,7 +7,11 @@ function configureStore(initialState = { board: [] }) {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const enhancers = composeEnhancers(applyMiddleware(thunk));
 
-  return createStore(rootReducer, { board: [], selectedCell: {} }, enhancers);
+  return createStore(
+    rootReducer,
+    { board: [], selectedCell: {}, errores: [] },
+    enhancers
+  );
 }
 
 export default configureStore;

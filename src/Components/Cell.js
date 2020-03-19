@@ -4,6 +4,7 @@ import { setSelected } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import Region from "./Region";
+import Board from "./Board";
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,11 @@ const Container = styled.div`
     css`
       background: lightblue;
     `}
+  ${({ validNumber }) =>
+    !validNumber &&
+    css`
+      background: red;
+    `}
 `;
 
 function Cell({ value, region, cellNumber, isSelected }) {
@@ -29,8 +35,20 @@ function Cell({ value, region, cellNumber, isSelected }) {
     dispatch(setSelected(region, cellNumber));
   };
 
+  const errores = useSelector(state => state.errores);
+  let conflict = false;
+  errores.map(error => {
+    if (error.region === region && error.cell === cellNumber) {
+      conflict = true;
+    }
+  });
+
   return (
-    <Container selected={isSelected} onClick={selectCell}>
+    <Container
+      validNumber={!conflict}
+      selected={isSelected}
+      onClick={selectCell}
+    >
       {value}
     </Container>
   );

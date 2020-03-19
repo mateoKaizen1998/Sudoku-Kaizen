@@ -1,18 +1,11 @@
 import Model from "./model";
 import { act } from "react-dom/test-utils";
 
-export default (state = { board: [], selectedCell: {} }, action) => {
+export default (
+  state = { board: [], selectedCell: {}, errores: [] },
+  action
+) => {
   switch (action.type) {
-    case "SIMPLE_ACTION":
-      return {
-        result: action.payload
-      };
-    /* case "onCellSelect":
-      return {
-        ...state,
-        selected: action.payload
-      }; */
-
     case "setBoard":
       return {
         ...state,
@@ -25,24 +18,42 @@ export default (state = { board: [], selectedCell: {} }, action) => {
         selectedCell: action.payload
       };
 
-    case "setCellValue": //sirve para setear el value a una cell
+    case "setCellValue":
       let newRegion = [
         ...state.board[state.selectedCell.region].slice(
           0,
           state.selectedCell.cell
         ),
         action.payload.value,
-        ...state.board[state.selectedCell.region].slice(state.selectedCell.cell)
+        ...state.board[state.selectedCell.region].slice(
+          state.selectedCell.cell + 1
+        )
       ];
+
+      let validValue = action.payload.validValue;
+      let errores;
+      if (!validValue) {
+        errores = [
+          ...state.errores,
+          {
+            region: state.selectedCell.region,
+            cell: state.selectedCell.cell
+          }
+        ];
+      } else {
+        errores = [...state.errores];
+      }
 
       return {
         ...state,
         board: [
           ...state.board.slice(0, state.selectedCell.region),
           newRegion,
-          ...state.board.slice(state.selectedCell.region)
-        ]
+          ...state.board.slice(state.selectedCell.region + 1)
+        ],
+        errores
       };
+
     default:
       return state;
   }

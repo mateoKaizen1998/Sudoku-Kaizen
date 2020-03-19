@@ -30,7 +30,7 @@ function Region({ region, regionNumber }) {
           region={regionNumber}
           cellNumber={cellNumber}
           isSelected={isSelected(cellNumber, regionNumber)}
-        /> //aca va la operacion para cambiar el valor de la celda
+        />
       ))}
     </Container>
   );
