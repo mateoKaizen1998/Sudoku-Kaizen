@@ -10,9 +10,9 @@ const setCellValue = (value, validValue) => ({
   payload: { value, validValue }
 });
 
-const setSelected = (region, cell) => ({
+const setSelected = (region, cell, value) => ({
   type: "setSelected",
-  payload: { region, cell }
+  payload: { region, cell, value }
 });
 
 export { setBoard, setCellValue, setSelected };

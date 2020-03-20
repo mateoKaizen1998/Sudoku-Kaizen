@@ -26,16 +26,34 @@ const Container = styled.div`
     css`
       background: red;
     `}
+  ${({ selectedNumber }) =>
+    selectedNumber &&
+    css`
+      background: lightskyblue;
+    `}
+  ${({ inSameCol }) =>
+    inSameCol &&
+    css`
+      background: lightblue;
+    `}
+  ${({ inSameRow }) =>
+    inSameRow &&
+    css`
+      background: lightblue;
+    `}
 `;
 
 function Cell({ value, region, cellNumber, isSelected }) {
   const dispatch = useDispatch();
-
   const selectCell = () => {
-    dispatch(setSelected(region, cellNumber));
+    dispatch(setSelected(region, cellNumber, value));
   };
 
+  const selectedRegion = useSelector(state => state.selectedCell.region);
+  const selectedCell = useSelector(state => state.selectedCell.cell);
+  const selectedValue = useSelector(state => state.selectedCell.value);
   const errores = useSelector(state => state.errores);
+
   let conflict = false;
   errores.map(error => {
     if (error.region === region && error.cell === cellNumber) {
@@ -43,11 +61,42 @@ function Cell({ value, region, cellNumber, isSelected }) {
     }
   });
 
+  const selectedNumber = (selectedValue, value) => {
+    return selectedValue === value && value !== null;
+  };
+
+  const inSameCol = (selectedRegion, selectedCell) => {
+    let startRegion = Math.floor(selectedRegion % 3);
+    for (let region2 = startRegion; region2 < startRegion + 7; region2 += 3) {
+      const startCell = Math.floor(selectedCell % 3);
+      for (let cell = startCell; cell < startCell + 7; cell += 3) {
+        if (cell === cellNumber && region2 === region) {
+          return true;
+        }
+      }
+    }
+  };
+
+  const inSameRow = (selectedRegion, selectedCell) => {
+    let startRegion = Math.floor(selectedRegion / 3) * 3;
+    for (let region2 = startRegion; region2 < startRegion + 3; region2++) {
+      var startCell = Math.floor(selectedCell / 3) * 3;
+      for (let cell = startCell; cell < startCell + 3; cell++) {
+        if (cell === cellNumber && region2 === region) {
+          return true;
+        }
+      }
+    }
+  };
+
   return (
     <Container
       validNumber={!conflict}
       selected={isSelected}
       onClick={selectCell}
+      selectedNumber={selectedNumber(selectedValue, value)}
+      inSameCol={inSameCol(selectedRegion, selectedCell)}
+      inSameRow={inSameRow(selectedRegion, selectedCell)}
     >
       {value}
     </Container>
