@@ -1,21 +1,27 @@
-.tableKeyboard {
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
   margin-left: 50px;
   width: auto;
   border: 2px solid black;
-  text-align: end;
 }
 
 button {
-  padding: 15px;
+  font-size: 20px;
+  font-family: sans-serif;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 2em;
+   box-sizing: border-box;
+   text-decoration: none;
+   font-family: "Roboto", sans-serif;
+   font-weight: 300;
+   color: #ffffff;
+   background-color: #4eb5f1;
 }
 
-#buttonRow {
-  display: flex;
-  text-align: center;
-  align-items: ;
-  font-size: 50px;
-}
-
-tr {
+.row4 {
   text-align: center;
 }

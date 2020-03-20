@@ -5,7 +5,7 @@ import { setBoard } from "../actions";
 import Keyboard from "../Keyboard";
 import Board from "./Board";
 
-const board = [
+/* const board = [
   [null, null, null, 9, null, 1, null, 2, null],
   [4, null, 7, 6, 8, 3, null, null, 5],
   [null, null, null, null, null, null, null, 7, null],
@@ -15,9 +15,9 @@ const board = [
   [1, 9, null, null, 4, null, null, 5, 6],
   [7, null, 4, 5, 9, 8, 1, null, null],
   [null, 8, 3, null, 2, 6, null, null, null]
-];
+]; */
 
-/* const board = [
+const board = [
   [
     { value: null, editable: true },
     { value: null, editable: true },
@@ -117,7 +117,7 @@ const board = [
     { value: null, editable: true },
     { value: null, editable: true }
   ]
-]; */
+];
 
 function Sudoku() {
   const dispatch = useDispatch();

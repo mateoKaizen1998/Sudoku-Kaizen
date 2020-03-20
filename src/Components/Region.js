@@ -26,10 +26,11 @@ function Region({ region, regionNumber }) {
     <Container>
       {region.map((cell, cellNumber) => (
         <Cell
-          value={cell}
+          value={cell.value}
           region={regionNumber}
           cellNumber={cellNumber}
           isSelected={isSelected(cellNumber, regionNumber)}
+          editable={cell.editable}
         />
       ))}
     </Container>

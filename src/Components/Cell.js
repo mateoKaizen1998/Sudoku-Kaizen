@@ -16,37 +16,42 @@ const Container = styled.div`
   box-sizing: border-box;
   text-align: center;
   font-size: 20px;
-  ${({ selected }) =>
-    selected &&
-    css`
-      background: lightblue;
-    `}
-  ${({ validNumber }) =>
+  /* ${({ validNumber }) =>
     !validNumber &&
     css`
       background: red;
     `}
-  ${({ selectedNumber }) =>
+  ${({ selectedNumber, validNumber }) =>
     selectedNumber &&
+    validNumber &&
     css`
       background: lightskyblue;
     `}
-  ${({ inSameCol }) =>
-    inSameCol &&
+  ${({ inSameCol, inSameRow, validNumber }) =>
+    (inSameCol || inSameRow) &&
+    validNumber &&
     css`
       background: lightblue;
-    `}
-  ${({ inSameRow }) =>
-    inSameRow &&
-    css`
-      background: lightblue;
-    `}
+    `} */
+  ${({ selectedNumber, validNumber, inSameCol, inSameRow }) => {
+    let background;
+    if (!validNumber) {
+      background = "red";
+    } else if (selectedNumber) {
+      background = "lightskyblue";
+    } else if (inSameCol || inSameRow) {
+      background = "lightblue";
+    }
+    return css`
+      background: ${background};
+    `;
+  }}
 `;
 
-function Cell({ value, region, cellNumber, isSelected }) {
+function Cell({ value, region, cellNumber, isSelected, editable }) {
   const dispatch = useDispatch();
   const selectCell = () => {
-    dispatch(setSelected(region, cellNumber, value));
+    dispatch(setSelected(region, cellNumber, value, editable));
   };
 
   const selectedRegion = useSelector(state => state.selectedCell.region);
