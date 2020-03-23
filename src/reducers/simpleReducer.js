@@ -1,8 +1,9 @@
-import Model from "./model";
-import { act } from "react-dom/test-utils";
-
 export default (
-  state = { board: [], selectedCell: {}, errores: [] },
+  state = {
+    board: [],
+    selectedCell: {},
+    errores: [{ region: null, cell: null }]
+  },
   action
 ) => {
   switch (action.type) {
@@ -19,7 +20,6 @@ export default (
       };
 
     case "setCellValue":
-      console.log("Estoy dentro del reducer" + action.payload.value);
       let newRegion = [
         ...state.board[state.selectedCell.region].slice(
           0,
@@ -47,7 +47,13 @@ export default (
           }
         ];
       } else {
-        errores = [...state.errores];
+        errores = state.errores.filter(
+          error =>
+            !(
+              error.region === state.selectedCell.region &&
+              error.cell === state.selectedCell.cell
+            )
+        );
       }
 
       return {
@@ -65,7 +71,7 @@ export default (
   }
 };
 
-// Spread operator: Lucas: "Le saca todo lo qeu tiene un objeto y lo pone al mismo nivel qeu el resto de las cosas", 2020 dc
+// Spread operator: Lucas: "Le saca todo lo que tiene un objeto y lo pone al mismo nivel qeu el resto de las cosas", 2020 dc
 /* 
 let user = {
   name: "mateo",

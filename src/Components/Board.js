@@ -9,10 +9,12 @@ const Container = styled.div`
   flex-wrap: wrap;
   width: 456px;
   border: 1px solid;
+  background: white;
 `;
 
 function Board() {
   const board = useSelector(state => state.board);
+
   return (
     <Container>
       {board.map((region, index) => (

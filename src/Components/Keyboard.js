@@ -1,19 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCellValue } from "./actions";
+import { setCellValue } from "../actions";
 import Button from "react-bootstrap/Button";
 
 import "./Keyboard.css";
 
 // returns true if board is valid, false otherwise
-const validInput = (board, indexRegion, indexCell, value) => {
-  let errores = [];
+const validInput = (board, indexRegion, indexCell, value, errors) => {
   if (value !== null) {
     // Checking the square
     let x2;
     for (x2 = 0; x2 < 9; ++x2) {
       if (x2 !== indexCell && board[indexRegion][x2].value === value) {
-        console.log("Toy en el primer if");
         return false;
       }
     }
@@ -27,7 +25,6 @@ const validInput = (board, indexRegion, indexCell, value) => {
           (cell !== indexCell || region !== indexRegion) &&
           value === board[region][cell].value
         ) {
-          console.log("Toy en el Segundo if");
           return false;
         }
       }
@@ -42,7 +39,6 @@ const validInput = (board, indexRegion, indexCell, value) => {
           (cell !== indexCell || region !== indexRegion) &&
           value === board[region][cell].value
         ) {
-          console.log("Toy en el tercer if");
           return false;
         }
       }
@@ -64,7 +60,6 @@ function Keyboard() {
     onClick = ({ target: { value } }) => {
       let parsedValue = parseInt(value);
       parsedValue = Number.isNaN(parsedValue) ? null : parsedValue;
-      console.log("Estoy dentro del callback", "value: ", parsedValue);
       dispatch(
         setCellValue(
           parsedValue,
@@ -79,45 +74,40 @@ function Keyboard() {
   return (
     <div className="container">
       <div className="row1">
-        <Button variant="light" value={1} onClick={onClick}>
+        <Button value={1} onClick={onClick}>
           1
         </Button>
-        <Button variant="light" value={2} onClick={onClick}>
+        <Button value={2} onClick={onClick}>
           2
         </Button>
-        <Button variant="light" value={3} onClick={onClick}>
+        <Button value={3} onClick={onClick}>
           3
         </Button>
       </div>
       <div className="row2">
-        <Button variant="light" value={4} onClick={onClick}>
+        <Button value={4} onClick={onClick}>
           4
         </Button>
-        <Button variant="light" value={5} onClick={onClick}>
+        <Button value={5} onClick={onClick}>
           5
         </Button>
-        <Button variant="light" value={6} onClick={onClick}>
+        <Button value={6} onClick={onClick}>
           6
         </Button>
       </div>
       <div className="row3">
-        <Button variant="light" value={7} onClick={onClick}>
+        <Button value={7} onClick={onClick}>
           7
         </Button>
-        <Button variant="light" value={8} onClick={onClick}>
+        <Button value={8} onClick={onClick}>
           8
         </Button>
-        <Button variant="light" value={9} onClick={onClick}>
+        <Button value={9} onClick={onClick}>
           9
         </Button>
       </div>
       <div className="row4">
-        <Button
-          variant="primary"
-          value={null}
-          onClick={onClick}
-          className="buttonClear"
-        >
+        <Button value={null} onClick={onClick} className="buttonClear">
           Delete
         </Button>
       </div>

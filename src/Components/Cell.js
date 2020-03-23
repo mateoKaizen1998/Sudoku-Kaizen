@@ -3,9 +3,6 @@ import styled, { css } from "styled-components";
 import { setSelected } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 
-import Region from "./Region";
-import Board from "./Board";
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -16,23 +13,7 @@ const Container = styled.div`
   box-sizing: border-box;
   text-align: center;
   font-size: 20px;
-  /* ${({ validNumber }) =>
-    !validNumber &&
-    css`
-      background: red;
-    `}
-  ${({ selectedNumber, validNumber }) =>
-    selectedNumber &&
-    validNumber &&
-    css`
-      background: lightskyblue;
-    `}
-  ${({ inSameCol, inSameRow, validNumber }) =>
-    (inSameCol || inSameRow) &&
-    validNumber &&
-    css`
-      background: lightblue;
-    `} */
+
   ${({ selectedNumber, validNumber, inSameCol, inSameRow }) => {
     let background;
     if (!validNumber) {
@@ -40,7 +21,7 @@ const Container = styled.div`
     } else if (selectedNumber) {
       background = "lightskyblue";
     } else if (inSameCol || inSameRow) {
-      background = "lightblue";
+      background = "lightgrey";
     }
     return css`
       background: ${background};
@@ -59,12 +40,10 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
   const selectedValue = useSelector(state => state.selectedCell.value);
   const errores = useSelector(state => state.errores);
 
-  let conflict = false;
-  errores.map(error => {
-    if (error.region === region && error.cell === cellNumber) {
-      conflict = true;
-    }
-  });
+  let error = errores.find(
+    error => error.region === region && error.cell === cellNumber
+  );
+  let conflict = error ? true : false;
 
   const selectedNumber = (selectedValue, value) => {
     return selectedValue === value && value !== null;
@@ -80,6 +59,7 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
         }
       }
     }
+    return false;
   };
 
   const inSameRow = (selectedRegion, selectedCell) => {
@@ -92,6 +72,7 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
         }
       }
     }
+    return false;
   };
 
   return (
