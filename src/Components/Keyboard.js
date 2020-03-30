@@ -49,6 +49,8 @@ const validInput = (board, indexRegion, indexCell, value, errors) => {
 
 function Keyboard() {
   const board = useSelector(state => state.board);
+
+  // Aca podrias usar un mismo selector
   const selectedRegion = useSelector(state => state.selectedCell.region);
   const selectedCell = useSelector(state => state.selectedCell.cell);
   const editable = useSelector(state => state.selectedCell.editable);
@@ -56,6 +58,9 @@ function Keyboard() {
   const dispatch = useDispatch();
 
   let onClick;
+
+  // Esto se corre cada vez que se triggerea el render, podrias optimizarlo
+  // Usando un UseEffect con editable como dependencia
   if (editable) {
     onClick = ({ target: { value } }) => {
       let parsedValue = parseInt(value);
@@ -107,6 +112,7 @@ function Keyboard() {
         </Button>
       </div>
       <div className="row4">
+        {/* a veces usas styled components y a veces css */}
         <Button value={null} onClick={onClick} className="buttonClear">
           Delete
         </Button>

@@ -115,6 +115,7 @@ function Sudoku() {
 
   return (
     <>
+      {/* trata de no poner estilos inline si estas usando css */}
       <div
         style={{
           display: "flex",
