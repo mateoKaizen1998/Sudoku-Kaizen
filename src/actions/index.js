@@ -11,6 +11,7 @@ const setCellValue = (value, validValue) => ({
 });
 
 const setSelected = (region, cell, value, editable) => ({
+  // Es una buena practica tenes las acciones de los reducers como constantes
   type: "setSelected",
   payload: { region, cell, value, editable }
 });

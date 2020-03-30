@@ -40,9 +40,13 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
   const selectedValue = useSelector(state => state.selectedCell.value);
   const errores = useSelector(state => state.errores);
 
+  // spanglish
   let error = errores.find(
+    // consistencia, si usas cellNumber entonces trata de poner regionNumber tambien
     error => error.region === region && error.cell === cellNumber
   );
+
+  // el ternario es redundante aca
   let conflict = error ? true : false;
 
   const selectedNumber = (selectedValue, value) => {
@@ -51,8 +55,13 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
 
   const inSameCol = (selectedRegion, selectedCell) => {
     let startRegion = Math.floor(selectedRegion % 3);
+    // trata de crearconstantes semanticas para el for, region2 es la region siguiente o siempre
+    // la region numero 2? Por que sumas 7 a start region?
+
     for (let region2 = startRegion; region2 < startRegion + 7; region2 += 3) {
       const startCell = Math.floor(selectedCell % 3);
+
+      // idem aca
       for (let cell = startCell; cell < startCell + 7; cell += 3) {
         if (cell === cellNumber && region2 === region) {
           return true;
@@ -63,6 +72,8 @@ function Cell({ value, region, cellNumber, isSelected, editable }) {
   };
 
   const inSameRow = (selectedRegion, selectedCell) => {
+
+    // IDEM aca
     let startRegion = Math.floor(selectedRegion / 3) * 3;
     for (let region2 = startRegion; region2 < startRegion + 3; region2++) {
       var startCell = Math.floor(selectedCell / 3) * 3;

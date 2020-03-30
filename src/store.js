@@ -9,6 +9,7 @@ function configureStore(initialState = { board: [] }) {
 
   return createStore(
     rootReducer,
+    // Ojo con el spanglish
     { board: [], selectedCell: {}, errores: [{ region: null, cell: null }] },
     enhancers
   );
